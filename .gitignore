@@ -35,3 +35,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+AWSCLIV2.pkg
+*.yaml

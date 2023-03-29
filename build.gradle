@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.10'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'com.google.cloud.tools.jib' version '3.2.0'
 }
 
 group = 'goormton.tamrazu'
@@ -30,4 +31,30 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+jib {
+    from {
+        image = 'openjdk:17-jdk'
+    }
+    to {
+        image = '078512149071.dkr.ecr.ap-northeast-2.amazonaws.com/tamrazu'
+        tags = ['1.0']
+    }
+    container {
+        entrypoint = ['java', '-Dspring profiles.active=prod', '-jar', 'app.jar']
+        ports = ['8080']
+
+        environment = [SPRING_OUTPUT_ANSI_ENABLED: "ALWAYS"]
+        labels = [Iversion: project.version, name: project.name, group: project.group]
+
+        format = 'Docker'
+    }
+    extraDirectories {
+        paths {
+            path {
+                from = file('build/libs')
+            }
+        }
+    }
 }
