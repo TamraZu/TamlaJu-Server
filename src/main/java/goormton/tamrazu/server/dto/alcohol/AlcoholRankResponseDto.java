@@ -14,7 +14,7 @@ public record AlcoholRankResponseDto(
 			alcohol.getId(),
 			alcohol.getName(),
 			alcohol.getImageUrl(),
-			alcohol.getFactory().getAddress(),
+			alcohol.getFactory().getName(),
 			alcohol.getAteCount());
 	}
 }

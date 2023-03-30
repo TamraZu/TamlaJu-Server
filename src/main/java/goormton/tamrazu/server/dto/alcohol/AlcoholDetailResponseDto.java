@@ -1,7 +1,5 @@
 package goormton.tamrazu.server.dto.alcohol;
 
-import goormton.tamrazu.server.domain.Alcohol;
-
 public record AlcoholDetailResponseDto(
 	Long alcoholId,
 	String name,
@@ -9,6 +7,7 @@ public record AlcoholDetailResponseDto(
 	Long price,
 	String address,
 	String region,
+	String factory,
 	Long volume,
 	float level,
 	String category,

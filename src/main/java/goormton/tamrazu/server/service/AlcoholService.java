@@ -65,6 +65,7 @@ public class AlcoholService {
 			alcohol.getPrice(),
 			alcohol.getFactory().getAddress(),
 			alcohol.getRegion(),
+			alcohol.getFactory().getName(),
 			alcohol.getVolume(),
 			alcohol.getLevel(),
 			alcohol.getCategory().getName(),
