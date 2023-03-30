@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import goormton.tamrazu.server.common.ApiResponse;
 import goormton.tamrazu.server.domain.Category;
+import goormton.tamrazu.server.dto.alcohol.AlcoholDetailResponseDto;
 import goormton.tamrazu.server.dto.alcohol.AlcoholRankResponseDto;
 import goormton.tamrazu.server.dto.alcohol.AlcoholResponseDto;
 import goormton.tamrazu.server.service.AlcoholService;
@@ -33,5 +35,12 @@ public class AlcoholController {
 		@RequestParam("memberId") Long memberId, @RequestParam(required = false, name = "category")Category category) {
 		List<AlcoholResponseDto> response = alcoholService.getAlcohols(memberId, category);
 		return ResponseEntity.ok(ApiResponse.success("전통주 전체 조회 성공", response));
+	}
+
+	@GetMapping("/{alcoholId}")
+	public ResponseEntity<ApiResponse> getAlcoholDetail(
+		@PathVariable("alcoholId") Long alcoholId, @RequestParam("memberId") Long memberId) {
+		AlcoholDetailResponseDto response = alcoholService.getAlcoholDetail(alcoholId, memberId);
+		return ResponseEntity.ok(ApiResponse.success("전통주 상세 조회 성공", response));
 	}
 }

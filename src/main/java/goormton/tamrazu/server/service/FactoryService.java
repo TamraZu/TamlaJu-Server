@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import goormton.tamrazu.server.domain.Factory;
 import goormton.tamrazu.server.dto.factory.FactoryDetailResponseDto;
@@ -14,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class FactoryService {
 
 	private final FactoryRepository factoryRepository;

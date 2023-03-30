@@ -3,6 +3,7 @@ package goormton.tamrazu.server.service;
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import goormton.tamrazu.server.domain.Member;
 import goormton.tamrazu.server.dto.member.MemberRequestDto;
@@ -12,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class MemberService {
 
 	private final MemberRepository memberRepository;
