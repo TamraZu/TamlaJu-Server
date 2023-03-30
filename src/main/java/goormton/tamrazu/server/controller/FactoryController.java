@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import goormton.tamrazu.server.common.ApiResponse;
@@ -22,8 +23,8 @@ public class FactoryController {
 	private final FactoryService factoryService;
 
 	@GetMapping
-	public ResponseEntity<ApiResponse> getAllAlcohols() {
-		List<FactoryResponseDto> response = factoryService.getAllFactories();
+	public ResponseEntity<ApiResponse> getAllAlcohols(@RequestParam("memberId") Long memberId) {
+		List<FactoryResponseDto> response = factoryService.getAllFactories(memberId);
 		return ResponseEntity.ok(ApiResponse.success("양조장 전체 조회 성공", response));
 	}
 
