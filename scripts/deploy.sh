@@ -1,7 +1,7 @@
 REPOSITORY=/home/ubuntu/build
 cd $REPOSITORY
 
-APP_NAME=pearls
+APP_NAME=hamrazu
 JAR_NAME=$(ls $REPOSITORY/build/libs/ | grep '.jar' | tail -n 1)
 JAR_PATH=$REPOSITORY/build/libs/$JAR_NAME
 
