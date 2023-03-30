@@ -23,8 +23,8 @@ public class Factory {
 
 	private String name;
 	private String address;
-	private float latitude;
-	private float longitude;
+	private double latitude;
+	private double longitude;
 
 	@OneToMany(mappedBy = "factory")
 	private List<Alcohol> alcohols = new ArrayList<>();

@@ -4,8 +4,8 @@ import goormton.tamrazu.server.domain.Factory;
 
 public record FactoryResponseDto(
 	Long factoryId,
-	float latitude,
-	float longitude,
+	double latitude,
+	double longitude,
 	String address,
 	boolean hasAte) {
 }

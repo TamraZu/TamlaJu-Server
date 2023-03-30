@@ -13,6 +13,7 @@ public record AlcoholDetailResponseDto(
 	float level,
 	String category,
 	String description,
+	String tasteImage,
 	int ateCount,
 	boolean hasAte) {
 }

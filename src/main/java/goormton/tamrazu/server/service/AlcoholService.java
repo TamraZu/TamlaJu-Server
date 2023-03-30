@@ -69,6 +69,7 @@ public class AlcoholService {
 			alcohol.getLevel(),
 			alcohol.getCategory().getName(),
 			alcohol.getDescription(),
+			alcohol.getTasteImage(),
 			alcohol.getAteCount(),
 			getHasAte(alcohol, member));
 	}

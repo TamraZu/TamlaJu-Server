@@ -5,10 +5,23 @@ import java.util.List;
 import goormton.tamrazu.server.domain.Alcohol;
 import goormton.tamrazu.server.domain.Member;
 
-public record MemberPageResponseDto(Long memberId, String nickname, List<MemberAlcoholVo> alcohols) {
+public record MemberPageResponseDto(
+	Long memberId,
+	String nickname,
+	int count,
+	List<MemberAlcoholVo> alcohols) {
 	public static MemberPageResponseDto of(Member member) {
-		return new MemberPageResponseDto(member.getId(), member.getNickname(),
-			member.getAteAlcohols().stream().map(eat -> MemberAlcoholVo.of(eat.getAlcohol())).toList());
+
+		List<MemberAlcoholVo> alcohols = member.getAteAlcohols()
+			.stream()
+			.map(eat -> MemberAlcoholVo.of(eat.getAlcohol()))
+			.toList();
+
+		return new MemberPageResponseDto(
+			member.getId(),
+			member.getNickname(),
+			alcohols.size(),
+			alcohols);
 	}
 }
 

@@ -32,6 +32,7 @@ public class Alcohol {
 	private float level;
 	private Long volume;
 	private String description;
+	private String tasteImage;
 	private String region;
 
 	@Enumerated(EnumType.STRING)
