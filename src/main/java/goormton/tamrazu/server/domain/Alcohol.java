@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -31,6 +33,8 @@ public class Alcohol {
 	private Long volume;
 	private String description;
 	private String region;
+
+	@Enumerated(EnumType.STRING)
 	private Category category;
 	private int ateCount;
 
