@@ -1,5 +1,8 @@
 package goormton.tamrazu.server.domain;
 
+import lombok.Getter;
+
+@Getter
 public enum Category {
 	Makgeolli("막걸리"),
 	Yakju("약주"),
