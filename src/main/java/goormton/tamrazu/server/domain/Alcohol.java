@@ -22,10 +22,19 @@ public class Alcohol {
 	@Column(name = "alcohol_id")
 	private Long id;
 
+	private String name;
+	private String imageUrl;
+	private Long price;
+	private float level;
+	private Long volume;
+	private String description;
+	private String region;
+	private Category category;
+
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "factory_id")
 	private Factory factory;
 
 	@OneToMany(mappedBy = "alcohol")
-	List<Member> members = new ArrayList<>();
+	List<Eat> ateMember = new ArrayList<>();
 }

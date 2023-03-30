@@ -18,6 +18,11 @@ public class Factory {
 	@Column(name = "factory_id")
 	private Long id;
 
+	private String name;
+	private String address;
+	private Long latitude;
+	private Long longitude;
+
 	@OneToMany(mappedBy = "factory")
 	private List<Alcohol> alcohols = new ArrayList<>();
 }
