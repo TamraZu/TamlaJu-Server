@@ -1,4 +1,4 @@
-package goormton.tamrazu.server.dto;
+package goormton.tamrazu.server.dto.member;
 
 import goormton.tamrazu.server.domain.Member;
 

@@ -5,8 +5,8 @@ import javax.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import goormton.tamrazu.server.domain.Member;
-import goormton.tamrazu.server.dto.MemberRequestDto;
-import goormton.tamrazu.server.dto.MemberResponseDto;
+import goormton.tamrazu.server.dto.member.MemberRequestDto;
+import goormton.tamrazu.server.dto.member.MemberResponseDto;
 import goormton.tamrazu.server.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 

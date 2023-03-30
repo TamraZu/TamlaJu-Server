@@ -11,7 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import lombok.Getter;
+
 @Entity
+@Getter
 public class Factory {
 
 	@Id @GeneratedValue(strategy = IDENTITY)
@@ -20,8 +23,8 @@ public class Factory {
 
 	private String name;
 	private String address;
-	private Long latitude;
-	private Long longitude;
+	private float latitude;
+	private float longitude;
 
 	@OneToMany(mappedBy = "factory")
 	private List<Alcohol> alcohols = new ArrayList<>();

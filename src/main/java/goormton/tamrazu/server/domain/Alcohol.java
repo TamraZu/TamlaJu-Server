@@ -30,6 +30,7 @@ public class Alcohol {
 	private String description;
 	private String region;
 	private Category category;
+	private int ateCount;
 
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "factory_id")
@@ -37,4 +38,12 @@ public class Alcohol {
 
 	@OneToMany(mappedBy = "alcohol")
 	List<Eat> ateMember = new ArrayList<>();
+
+	public void plusAteCount() {
+		this.ateCount++;
+	}
+
+	public void minusAteCount() {
+		this.ateCount--;
+	}
 }
