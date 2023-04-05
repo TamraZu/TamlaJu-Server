@@ -10,21 +10,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Member {
 
 	@Id @GeneratedValue(strategy = IDENTITY)
 	@Column(name = "member_id")
 	private Long id;
 
-	private String username;
-	private String password;
+	@Column(unique = true)
+	private String email;
 	private String nickname;
+	private String imageUrl;
 
 	@OneToMany(mappedBy = "member")
-	private List<Eat> ateAlcohols = new ArrayList<>();
+	private final List<History> ateAlcohols = new ArrayList<>();
+
+	public Member(String email, String nickname, String imageUrl) {
+		this.email = email;
+		this.nickname = nickname;
+		this.imageUrl = imageUrl;
+	}
 }

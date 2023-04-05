@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import goormton.tamrazu.server.domain.Alcohol;
-import goormton.tamrazu.server.domain.Eat;
+import goormton.tamrazu.server.domain.History;
 import goormton.tamrazu.server.domain.Member;
 import goormton.tamrazu.server.dto.eat.EatRequestDto;
 import goormton.tamrazu.server.repository.AlcoholRepository;
@@ -33,7 +33,7 @@ public class EatService {
 		Alcohol alcohol = alcoholRepository.findById(eatRequestDto.alcoholId())
 			.orElseThrow(() -> new EntityNotFoundException("해당 전통주가 존재하지 않습니다."));
 
-		Optional<Eat> eat = eatRepository.findByMemberAndAlcohol(member, alcohol);
+		Optional<History> eat = eatRepository.findByMemberAndAlcohol(member, alcohol);
 
 		if (eat.isPresent()) {
 			member.getAteAlcohols().remove(eat.get());
@@ -42,7 +42,7 @@ public class EatService {
 			alcohol.minusAteCount();
 			return false;
 		} else {
-			Eat savedEat = eatRepository.save(new Eat(member, alcohol));
+			History savedEat = eatRepository.save(new History(member, alcohol));
 			savedEat.setAlcohol(alcohol);
 			savedEat.setMember(member);
 			alcohol.plusAteCount();

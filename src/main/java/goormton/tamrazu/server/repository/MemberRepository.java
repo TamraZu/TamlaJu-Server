@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import goormton.tamrazu.server.domain.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
-
-	Optional<Member> findByUsernameAndPassword(String username, String password);
+	boolean existsByEmail(String email);
+	Optional<Member> findByEmail(String email);
 }

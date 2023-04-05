@@ -44,7 +44,7 @@ public class Alcohol {
 	private Factory factory;
 
 	@OneToMany(mappedBy = "alcohol")
-	List<Eat> ateMember = new ArrayList<>();
+	List<History> ateMember = new ArrayList<>();
 
 	public void plusAteCount() {
 		this.ateCount++;
