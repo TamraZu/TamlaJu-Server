@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Eat {
+public class History {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "eat_id")
@@ -32,7 +32,7 @@ public class Eat {
 	@JoinColumn(name = "alcohol_id")
 	private Alcohol alcohol;
 
-	public Eat(Member member, Alcohol alcohol) {
+	public History(Member member, Alcohol alcohol) {
 		this.member = member;
 		this.alcohol = alcohol;
 		alcohol.plusAteCount();

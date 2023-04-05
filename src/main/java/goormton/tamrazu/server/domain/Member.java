@@ -23,16 +23,16 @@ public class Member {
 	@Column(name = "member_id")
 	private Long id;
 
-	private String username;
-	private String password;
+	private String email;
 	private String nickname;
+	private String imageUrl;
 
 	@OneToMany(mappedBy = "member")
-	private List<Eat> ateAlcohols = new ArrayList<>();
+	private final List<History> ateAlcohols = new ArrayList<>();
 
-	public Member(String username, String password, String nickname) {
-		this.username = username;
-		this.password = password;
+	public Member(String email, String nickname, String imageUrl) {
+		this.email = email;
 		this.nickname = nickname;
+		this.imageUrl = imageUrl;
 	}
 }
