@@ -12,9 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor
 public class Member {
 
 	@Id @GeneratedValue(strategy = IDENTITY)
@@ -27,4 +29,10 @@ public class Member {
 
 	@OneToMany(mappedBy = "member")
 	private List<Eat> ateAlcohols = new ArrayList<>();
+
+	public Member(String username, String password, String nickname) {
+		this.username = username;
+		this.password = password;
+		this.nickname = nickname;
+	}
 }

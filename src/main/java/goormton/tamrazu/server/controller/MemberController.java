@@ -12,6 +12,7 @@ import goormton.tamrazu.server.common.ApiResponse;
 import goormton.tamrazu.server.dto.member.MemberPageResponseDto;
 import goormton.tamrazu.server.dto.member.MemberRequestDto;
 import goormton.tamrazu.server.dto.member.MemberResponseDto;
+import goormton.tamrazu.server.dto.member.MemberSignupRequestDTO;
 import goormton.tamrazu.server.service.MemberService;
 import lombok.RequiredArgsConstructor;
 
@@ -21,6 +22,12 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
 	private final MemberService memberService;
+
+	@PostMapping("/signup")
+	public ResponseEntity<ApiResponse> signup(@RequestBody MemberSignupRequestDTO requestDTO) {
+		Long response = memberService.signup(requestDTO);
+		return ResponseEntity.ok(ApiResponse.success("회원가입 성공", response));
+	}
 
 	@PostMapping("/sign")
 	public ResponseEntity<ApiResponse> sign(@RequestBody MemberRequestDto memberRequestDto) {
