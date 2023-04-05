@@ -29,12 +29,6 @@ public class MemberController {
 		return ResponseEntity.ok(ApiResponse.success("회원가입 성공", response));
 	}
 
-	@PostMapping("/sign")
-	public ResponseEntity<ApiResponse> sign(@RequestBody MemberRequestDto memberRequestDto) {
-		MemberResponseDto response = memberService.sign(memberRequestDto);
-		return ResponseEntity.ok(ApiResponse.success("로그인 성공", response));
-	}
-
 	@GetMapping("/page/{memberId}")
 	public ResponseEntity<ApiResponse> getPage(@PathVariable("memberId") Long memberId) {
 		MemberPageResponseDto response = memberService.getPage(memberId);

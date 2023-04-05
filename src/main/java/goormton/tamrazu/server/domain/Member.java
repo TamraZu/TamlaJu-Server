@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.UniqueConstraint;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class Member {
 	@Column(name = "member_id")
 	private Long id;
 
+	@Column(unique = true)
 	private String email;
 	private String nickname;
 	private String imageUrl;

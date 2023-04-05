@@ -20,14 +20,6 @@ public class MemberService {
 
 	private final MemberRepository memberRepository;
 
-	public MemberResponseDto sign(MemberRequestDto memberRequestDto) {
-		Member member = memberRepository
-			.findByUsernameAndPassword(memberRequestDto.username(), memberRequestDto.password())
-			.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 유저입니다."));
-
-		return new MemberResponseDto(member.getId());
-	}
-
 	public MemberPageResponseDto getPage(Long memberId) {
 		Member member = memberRepository.findById(memberId)
 			.orElseThrow(() -> new EntityNotFoundException("해당 유저가 존재하지 않습니다."));
