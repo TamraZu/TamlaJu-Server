@@ -57,11 +57,8 @@ public class JwtTokenProvider {
 				.build()
 				.parseClaimsJws(token);
 
-			System.out.println(claims);
-
 			return !claims.getBody().getExpiration().toInstant().atZone(KST).toLocalDateTime().isBefore(getCurrentTime());
-		} catch(Exception e) {
-			System.out.println(e);
+		} catch(Exception exception) {
 			return false;
 		}
 	}

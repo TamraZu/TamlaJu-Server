@@ -25,7 +25,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 		String token = jwtTokenProvider.resolveToken(request);
 
 		if (token != null && jwtTokenProvider.validateTokenExpiration(token)) {
-			System.out.println("test");
 			MemberAuthentication auth = jwtTokenProvider.getAuthentication(token);
 			auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 			SecurityContextHolder.getContext().setAuthentication(auth);
