@@ -4,7 +4,6 @@ import static java.util.Objects.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import goormton.tamrazu.server.domain.Alcohol;
 import goormton.tamrazu.server.domain.Category;
-import goormton.tamrazu.server.domain.History;
 import goormton.tamrazu.server.domain.Member;
 import goormton.tamrazu.server.dto.alcohol.AlcoholDetailResponseDto;
 import goormton.tamrazu.server.dto.alcohol.AlcoholRankResponseDto;
