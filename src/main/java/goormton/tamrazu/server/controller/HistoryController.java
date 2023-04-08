@@ -7,20 +7,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import goormton.tamrazu.server.common.ApiResponse;
-import goormton.tamrazu.server.dto.eat.EatRequestDto;
-import goormton.tamrazu.server.service.EatService;
+import goormton.tamrazu.server.dto.eat.HistoryRequestDto;
+import goormton.tamrazu.server.service.HistoryService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/eats")
-public class EatController {
+public class HistoryController {
 
-	private final EatService eatService;
+	private final HistoryService historyService;
 
 	@PostMapping
-	public ResponseEntity<ApiResponse> eatAlcohol(@RequestBody EatRequestDto eatRequestDto) {
-		boolean hasEat = eatService.eatAlcohol(eatRequestDto);
+	public ResponseEntity<ApiResponse> eatAlcohol(@RequestBody HistoryRequestDto requestDto) {
+		boolean hasEat = historyService.eatAlcohol(requestDto);
 		return ResponseEntity.ok(ApiResponse.success(hasEat ? "등록 성공" : "해제 성공"));
 	}
 }
