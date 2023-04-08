@@ -1,5 +1,6 @@
 package goormton.tamrazu.server.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -24,6 +25,7 @@ public class AlcoholController {
 
 	private final AlcoholService alcoholService;
 
+	//TODO: refactoring
 	@GetMapping("/rank")
 	public ResponseEntity<ApiResponse> getAlcoholsByRank() {
 		List<AlcoholRankResponseDto> response = alcoholService.getAlcoholsByRank();
@@ -32,7 +34,9 @@ public class AlcoholController {
 
 	@GetMapping
 	public ResponseEntity<ApiResponse> getAlcohols(
-		@RequestParam("memberId") Long memberId, @RequestParam(required = false, name = "category")Category category) {
+		Principal principal, @RequestParam(required = false) Category category) {
+
+		Long memberId = principal != null ? Long.parseLong(principal.getName()) : null;
 		List<AlcoholResponseDto> response = alcoholService.getAlcohols(memberId, category);
 		return ResponseEntity.ok(ApiResponse.success("전통주 전체 조회 성공", response));
 	}

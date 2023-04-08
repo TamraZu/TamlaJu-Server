@@ -12,7 +12,7 @@ public record MemberPageResponseDto(
 	List<MemberAlcoholVo> alcohols) {
 	public static MemberPageResponseDto of(Member member) {
 
-		List<MemberAlcoholVo> alcohols = member.getAteAlcohols()
+		List<MemberAlcoholVo> alcohols = member.getHistories()
 			.stream()
 			.map(eat -> MemberAlcoholVo.of(eat.getAlcohol()))
 			.toList();

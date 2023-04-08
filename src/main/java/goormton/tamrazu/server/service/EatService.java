@@ -11,7 +11,7 @@ import goormton.tamrazu.server.domain.Alcohol;
 import goormton.tamrazu.server.domain.History;
 import goormton.tamrazu.server.domain.Member;
 import goormton.tamrazu.server.dto.eat.EatRequestDto;
-import goormton.tamrazu.server.repository.AlcoholRepository;
+import goormton.tamrazu.server.repository.alcohol.AlcoholRepository;
 import goormton.tamrazu.server.repository.EatRepository;
 import goormton.tamrazu.server.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

@@ -2,6 +2,7 @@ package goormton.tamrazu.server.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -37,7 +38,8 @@ public class SecurityConfig {
 			.cors().configurationSource(corsConfigurationSource())
 			.and()
 			.authorizeRequests()
-			.antMatchers("/api/v1/auth/**","/exception/**").permitAll()
+			.antMatchers("/api/v1/auth/**").permitAll()
+			.antMatchers(HttpMethod.GET, "/api/v1/alcohols").permitAll()
 			.antMatchers("/api/v1/**").authenticated()
 			.and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -1,5 +1,8 @@
 package goormton.tamrazu.server.service;
 
+import static java.util.Objects.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,11 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import goormton.tamrazu.server.domain.Alcohol;
 import goormton.tamrazu.server.domain.Category;
+import goormton.tamrazu.server.domain.History;
 import goormton.tamrazu.server.domain.Member;
 import goormton.tamrazu.server.dto.alcohol.AlcoholDetailResponseDto;
 import goormton.tamrazu.server.dto.alcohol.AlcoholRankResponseDto;
 import goormton.tamrazu.server.dto.alcohol.AlcoholResponseDto;
-import goormton.tamrazu.server.repository.AlcoholRepository;
+import goormton.tamrazu.server.repository.alcohol.AlcoholRepository;
 import goormton.tamrazu.server.repository.EatRepository;
 import goormton.tamrazu.server.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,16 +39,11 @@ public class AlcoholService {
 	}
 
 	public List<AlcoholResponseDto> getAlcohols(Long memberId, Category category) {
-		Member member = memberRepository.findById(memberId)
-			.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 유저입니다."));
-
-		if (Objects.isNull(category)) {
-			return alcoholRepository.findAll()
-				.stream().map(alcohol -> getAlcoholDto(alcohol, member)).toList();
-		} else {
-			return alcoholRepository.findByCategory(category)
-				.stream().map(alcohol -> getAlcoholDto(alcohol, member)).toList();
-		}
+		Member member = getMember(memberId);
+		return alcoholRepository
+			.getAllByCategory(category)
+			.stream().map(alcohol -> getAlcoholDto(alcohol, member))
+			.toList();
 	}
 
 	public AlcoholDetailResponseDto getAlcoholDetail(Long alcoholId, Long memberId) {
@@ -76,6 +75,10 @@ public class AlcoholService {
 	}
 
 	private AlcoholResponseDto getAlcoholDto(Alcohol alcohol, Member member) {
+		List<Alcohol> histories = nonNull(member)
+			? alcoholRepository.getAlcoholsMemberHistory(member)
+			: new ArrayList<>();
+
 		return new AlcoholResponseDto(
 			alcohol.getId(),
 			alcohol.getName(),
@@ -84,10 +87,18 @@ public class AlcoholService {
 			alcohol.getLevel(),
 			alcohol.getPrice(),
 			alcohol.getAteCount(),
-			getHasAte(alcohol, member));
+			histories.contains(alcohol));
 	}
 
 	private boolean getHasAte(Alcohol alcohol, Member member) {
 		return eatRepository.existsByMemberAndAlcohol(member, alcohol);
+	}
+
+	private Member getMember(Long memberId) {
+		return memberId != null
+			? memberRepository
+			.findById(memberId)
+			.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 유저입니다."))
+			: null;
 	}
 }
