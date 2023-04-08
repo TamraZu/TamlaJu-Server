@@ -12,8 +12,8 @@ import goormton.tamrazu.server.domain.Factory;
 import goormton.tamrazu.server.domain.Member;
 import goormton.tamrazu.server.dto.factory.FactoryDetailResponseDto;
 import goormton.tamrazu.server.dto.factory.FactoryResponseDto;
-import goormton.tamrazu.server.repository.EatRepository;
 import goormton.tamrazu.server.repository.FactoryRepository;
+import goormton.tamrazu.server.repository.HistoryRepository;
 import goormton.tamrazu.server.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +24,7 @@ public class FactoryService {
 
 	private final FactoryRepository factoryRepository;
 	private final MemberRepository memberRepository;
-	private final EatRepository eatRepository;
+	private final HistoryRepository historyRepository;
 
 	public List<FactoryResponseDto> getAllFactories(Long memberId) {
 
@@ -51,7 +51,7 @@ public class FactoryService {
 
 	private boolean hasAte(Factory factory, Member member) {
 		for (Alcohol alcohol : factory.getAlcohols()) {
-			if (eatRepository.existsByMemberAndAlcohol(member, alcohol)) {
+			if (historyRepository.existsByMemberAndAlcohol(member, alcohol)) {
 				return true;
 			}
 		}

@@ -17,7 +17,6 @@ import goormton.tamrazu.server.dto.alcohol.AlcoholDetailResponseDto;
 import goormton.tamrazu.server.dto.alcohol.AlcoholRankResponseDto;
 import goormton.tamrazu.server.dto.alcohol.AlcoholResponseDto;
 import goormton.tamrazu.server.repository.alcohol.AlcoholRepository;
-import goormton.tamrazu.server.repository.EatRepository;
 import goormton.tamrazu.server.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -27,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 public class AlcoholService {
 
 	private final AlcoholRepository alcoholRepository;
-	private final EatRepository eatRepository;
 	private final MemberRepository memberRepository;
 
 	public List<AlcoholRankResponseDto> getAlcoholsByRank() {
@@ -37,24 +35,21 @@ public class AlcoholService {
 	}
 
 	public List<AlcoholResponseDto> getAlcohols(Long memberId, Category category) {
-		Member member = getMember(memberId);
+		List<Alcohol> histories = getMemberHistory(getMember(memberId));
 		return alcoholRepository
 			.getAllByCategory(category)
-			.stream().map(alcohol -> getAlcoholDto(alcohol, member))
+			.stream().map(alcohol -> getAlcoholDto(alcohol, histories))
 			.toList();
 	}
 
 	public AlcoholDetailResponseDto getAlcoholDetail(Long alcoholId, Long memberId) {
 		Alcohol alcohol = alcoholRepository.findById(alcoholId)
 			.orElseThrow(() -> new EntityNotFoundException("해당 전통주가 존재하지 않습니다."));
-
-		Member member = memberRepository.findById(memberId)
-			.orElseThrow(() -> new EntityNotFoundException("해당 유저가 존재하지 않습니다."));
-
-		return getAlcoholDetailDto(alcohol, member);
+		List<Alcohol> histories = getMemberHistory(getMember(memberId));
+		return getAlcoholDetailDto(alcohol, histories);
 	}
 
-	private AlcoholDetailResponseDto getAlcoholDetailDto(Alcohol alcohol, Member member) {
+	private AlcoholDetailResponseDto getAlcoholDetailDto(Alcohol alcohol, List<Alcohol> histories) {
 		return new AlcoholDetailResponseDto(
 			alcohol.getId(),
 			alcohol.getName(),
@@ -69,14 +64,10 @@ public class AlcoholService {
 			alcohol.getDescription(),
 			alcohol.getTasteImage(),
 			alcohol.getAteCount(),
-			getHasAte(alcohol, member));
+			histories.contains(alcohol));
 	}
 
-	private AlcoholResponseDto getAlcoholDto(Alcohol alcohol, Member member) {
-		List<Alcohol> histories = nonNull(member)
-			? alcoholRepository.getAlcoholsMemberHistory(member)
-			: new ArrayList<>();
-
+	private AlcoholResponseDto getAlcoholDto(Alcohol alcohol, List<Alcohol> histories) {
 		return new AlcoholResponseDto(
 			alcohol.getId(),
 			alcohol.getName(),
@@ -88,8 +79,10 @@ public class AlcoholService {
 			histories.contains(alcohol));
 	}
 
-	private boolean getHasAte(Alcohol alcohol, Member member) {
-		return eatRepository.existsByMemberAndAlcohol(member, alcohol);
+	private List<Alcohol> getMemberHistory(Member member) {
+		return nonNull(member)
+			? alcoholRepository.getAlcoholsMemberHistory(member)
+			: new ArrayList<>();
 	}
 
 	private Member getMember(Long memberId) {

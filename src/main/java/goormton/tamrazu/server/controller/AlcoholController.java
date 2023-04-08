@@ -1,5 +1,7 @@
 package goormton.tamrazu.server.controller;
 
+import static java.util.Objects.*;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -35,16 +37,18 @@ public class AlcoholController {
 	@GetMapping
 	public ResponseEntity<ApiResponse> getAlcohols(
 		Principal principal, @RequestParam(required = false) Category category) {
-
-		Long memberId = principal != null ? Long.parseLong(principal.getName()) : null;
-		List<AlcoholResponseDto> response = alcoholService.getAlcohols(memberId, category);
+		List<AlcoholResponseDto> response = alcoholService.getAlcohols(getMemberId(principal), category);
 		return ResponseEntity.ok(ApiResponse.success("전통주 전체 조회 성공", response));
 	}
 
 	@GetMapping("/{alcoholId}")
 	public ResponseEntity<ApiResponse> getAlcoholDetail(
-		@PathVariable("alcoholId") Long alcoholId, @RequestParam("memberId") Long memberId) {
-		AlcoholDetailResponseDto response = alcoholService.getAlcoholDetail(alcoholId, memberId);
+		Principal principal, @PathVariable("alcoholId") Long alcoholId) {
+		AlcoholDetailResponseDto response = alcoholService.getAlcoholDetail(alcoholId, getMemberId(principal));
 		return ResponseEntity.ok(ApiResponse.success("전통주 상세 조회 성공", response));
+	}
+
+	private Long getMemberId(Principal principal) {
+		return nonNull(principal) ? Long.parseLong(principal.getName()) : null;
 	}
 }
