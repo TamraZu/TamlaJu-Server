@@ -18,6 +18,8 @@ import goormton.tamrazu.server.dto.member.MemberRequestDto;
 import goormton.tamrazu.server.dto.member.MemberResponseDto;
 import goormton.tamrazu.server.dto.member.MemberSignupRequestDTO;
 import goormton.tamrazu.server.service.MemberService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -27,12 +29,12 @@ public class MemberController {
 
 	private final MemberService memberService;
 
-	@PostMapping("/signup")
-	public ResponseEntity<ApiResponse> signup(@RequestBody MemberSignupRequestDTO requestDTO) {
-		Long response = memberService.signup(requestDTO);
-		return ResponseEntity.ok(ApiResponse.success("회원가입 성공", response));
-	}
-
+	@ApiOperation(value = "유저 페이지 조회")
+	@ApiResponses({
+		@io.swagger.annotations.ApiResponse(code = 200, message = "성공"),
+		@io.swagger.annotations.ApiResponse(code = 401, message = "인가인증 실패"),
+		@io.swagger.annotations.ApiResponse(code = 500, message = "서버 에러")
+	})
 	@GetMapping("/page")
 	public ResponseEntity<ApiResponse> getPage(Principal principal) {
 		MemberPageResponseDto response = memberService.getPage(getMemberId(principal));

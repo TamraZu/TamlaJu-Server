@@ -16,6 +16,8 @@ import goormton.tamrazu.server.common.ApiResponse;
 import goormton.tamrazu.server.dto.factory.FactoryDetailResponseDto;
 import goormton.tamrazu.server.dto.factory.FactoryResponseDto;
 import goormton.tamrazu.server.service.FactoryService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -25,12 +27,24 @@ public class FactoryController {
 
 	private final FactoryService factoryService;
 
+	@ApiOperation(value = "양조장 전체 조회")
+	@ApiResponses({
+		@io.swagger.annotations.ApiResponse(code = 200, message = "성공"),
+		@io.swagger.annotations.ApiResponse(code = 401, message = "인가인증 실패"),
+		@io.swagger.annotations.ApiResponse(code = 500, message = "서버 에러")
+	})
 	@GetMapping
 	public ResponseEntity<ApiResponse> getAllAlcohols(Principal principal) {
 		List<FactoryResponseDto> response = factoryService.getAllFactories(getMemberId(principal));
 		return ResponseEntity.ok(ApiResponse.success("양조장 전체 조회 성공", response));
 	}
 
+	@ApiOperation(value = "양조장 단일 조회")
+	@ApiResponses({
+		@io.swagger.annotations.ApiResponse(code = 200, message = "성공"),
+		@io.swagger.annotations.ApiResponse(code = 401, message = "인가인증 실패"),
+		@io.swagger.annotations.ApiResponse(code = 500, message = "서버 에러")
+	})
 	@GetMapping("/{factoryId}")
 	public ResponseEntity<ApiResponse> getAlcoholsOfFactory(
 		Principal principal, @PathVariable("factoryId") Long factoryId) {
