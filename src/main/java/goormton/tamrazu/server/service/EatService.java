@@ -36,8 +36,8 @@ public class EatService {
 		Optional<History> eat = eatRepository.findByMemberAndAlcohol(member, alcohol);
 
 		if (eat.isPresent()) {
-			member.getAteAlcohols().remove(eat.get());
-			alcohol.getAteMember().remove(eat.get());
+			member.getHistories().remove(eat.get());
+			alcohol.getHistories().remove(eat.get());
 			eatRepository.deleteByMemberAndAlcohol(member, alcohol);
 			alcohol.minusAteCount();
 			return false;

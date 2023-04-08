@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 public class History {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "eat_id")
+	@Column(name = "history_id")
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -40,18 +40,18 @@ public class History {
 
 	public void setMember(Member member) {
 		if (Objects.nonNull(this.member)) {
-			this.member.getAteAlcohols().remove(this);
+			this.member.getHistories().remove(this);
 		}
 		this.member = member;
-		member.getAteAlcohols().add(this);
+		member.getHistories().add(this);
 	}
 
 	public void setAlcohol(Alcohol alcohol) {
 		if (Objects.nonNull(this.alcohol)) {
-			this.alcohol.getAteMember().remove(this);
+			this.alcohol.getHistories().remove(this);
 		}
 		this.alcohol = alcohol;
-		alcohol.getAteMember().add(this);
+		alcohol.getHistories().add(this);
 		alcohol.plusAteCount();
 	}
 }

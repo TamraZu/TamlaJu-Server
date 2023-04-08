@@ -30,7 +30,7 @@ public class Member {
 	private String imageUrl;
 
 	@OneToMany(mappedBy = "member")
-	private final List<History> ateAlcohols = new ArrayList<>();
+	private final List<History> histories = new ArrayList<>();
 
 	public Member(String email, String nickname, String imageUrl) {
 		this.email = email;
