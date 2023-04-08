@@ -27,7 +27,6 @@ public class AlcoholController {
 
 	private final AlcoholService alcoholService;
 
-	//TODO: refactoring
 	@GetMapping("/rank")
 	public ResponseEntity<ApiResponse> getAlcoholsByRank() {
 		List<AlcoholRankResponseDto> response = alcoholService.getAlcoholsByRank();

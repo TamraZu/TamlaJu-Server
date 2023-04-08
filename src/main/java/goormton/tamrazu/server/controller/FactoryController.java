@@ -1,5 +1,8 @@
 package goormton.tamrazu.server.controller;
 
+import static java.util.Objects.*;
+
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -23,8 +26,8 @@ public class FactoryController {
 	private final FactoryService factoryService;
 
 	@GetMapping
-	public ResponseEntity<ApiResponse> getAllAlcohols(@RequestParam("memberId") Long memberId) {
-		List<FactoryResponseDto> response = factoryService.getAllFactories(memberId);
+	public ResponseEntity<ApiResponse> getAllAlcohols(Principal principal) {
+		List<FactoryResponseDto> response = factoryService.getAllFactories(getMemberId(principal));
 		return ResponseEntity.ok(ApiResponse.success("양조장 전체 조회 성공", response));
 	}
 
@@ -32,5 +35,9 @@ public class FactoryController {
 	public ResponseEntity<ApiResponse> getAlcoholsOfFactory(@PathVariable("factoryId") Long factoryId) {
 		FactoryDetailResponseDto response = factoryService.getAlcoholsOfFactory(factoryId);
 		return ResponseEntity.ok(ApiResponse.success("양조장 단일 조회 성공", response));
+	}
+
+	private Long getMemberId(Principal principal) {
+		return nonNull(principal) ? Long.parseLong(principal.getName()) : null;
 	}
 }
