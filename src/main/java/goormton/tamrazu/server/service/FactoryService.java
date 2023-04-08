@@ -37,10 +37,10 @@ public class FactoryService {
 			.toList();
 	}
 
-	public FactoryDetailResponseDto getAlcoholsOfFactory(Long factoryId) {
+	public FactoryDetailResponseDto getAlcoholsOfFactory(Long factoryId, Long memberId) {
 		Factory factory = factoryRepository.findById(factoryId)
 			.orElseThrow(() -> new EntityNotFoundException("존재하지 않는 양조장입니다."));
-		return FactoryDetailResponseDto.of(factory);
+		return FactoryDetailResponseDto.of(factory, getMemberHistory(getMember(memberId)));
 	}
 
 	private FactoryResponseDto getFactory(Factory factory, List<Alcohol> histories) {

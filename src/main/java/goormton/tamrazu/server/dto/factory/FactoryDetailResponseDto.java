@@ -11,25 +11,30 @@ public record FactoryDetailResponseDto(
 	String address,
 	List<AlcoholVo> alcohols) {
 
-	public static FactoryDetailResponseDto of(Factory factory) {
+	public static FactoryDetailResponseDto of(Factory factory, List<Alcohol> histories) {
 		return new FactoryDetailResponseDto(
 			factory.getId(),
 			factory.getName(),
 			factory.getAddress(),
-			FactoryDetailResponseDto.getAlcohols(factory.getAlcohols()));
+			FactoryDetailResponseDto.getAlcohols(factory.getAlcohols(), histories));
 	}
 
-	private static List<AlcoholVo> getAlcohols(List<Alcohol> alcohols) {
-		return alcohols.stream().map(AlcoholVo::of).toList();
+	private static List<AlcoholVo> getAlcohols(List<Alcohol> alcohols, List<Alcohol> histories) {
+		return alcohols.stream().map(alcohol -> AlcoholVo.of(alcohol, histories)).toList();
 	}
 }
 
 record AlcoholVo(
 	Long alcoholId,
 	String imageUrl,
-	String name
+	String name,
+	boolean hasAte
 ) {
-	static AlcoholVo of(Alcohol alcohol) {
-		return new AlcoholVo(alcohol.getId(), alcohol.getImageUrl(), alcohol.getName());
+	static AlcoholVo of(Alcohol alcohol, List<Alcohol> histories) {
+		return new AlcoholVo(
+			alcohol.getId(),
+			alcohol.getImageUrl(),
+			alcohol.getName(),
+			histories.contains(alcohol));
 	}
 }

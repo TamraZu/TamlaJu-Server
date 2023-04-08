@@ -32,8 +32,10 @@ public class FactoryController {
 	}
 
 	@GetMapping("/{factoryId}")
-	public ResponseEntity<ApiResponse> getAlcoholsOfFactory(@PathVariable("factoryId") Long factoryId) {
-		FactoryDetailResponseDto response = factoryService.getAlcoholsOfFactory(factoryId);
+	public ResponseEntity<ApiResponse> getAlcoholsOfFactory(
+		Principal principal, @PathVariable("factoryId") Long factoryId) {
+
+		FactoryDetailResponseDto response = factoryService.getAlcoholsOfFactory(factoryId, getMemberId(principal));
 		return ResponseEntity.ok(ApiResponse.success("양조장 단일 조회 성공", response));
 	}
 
