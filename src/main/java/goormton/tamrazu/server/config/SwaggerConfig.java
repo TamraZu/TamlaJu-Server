@@ -23,8 +23,8 @@ import springfox.documentation.spring.web.plugins.Docket;
 @EnableWebMvc
 public class SwaggerConfig {
 	private ApiInfo swaggerInfo() {
-		return new ApiInfoBuilder().title("Makers Operation API")
-			.description("Makers Operation API Docs").build();
+		return new ApiInfoBuilder().title("탐라주 API")
+			.description("탐라주 API 명세서").build();
 	}
 
 	@Bean
@@ -35,7 +35,7 @@ public class SwaggerConfig {
 			.consumes(getConsumeContentTypes())
 			.produces(getProduceContentTypes())
 			.apiInfo(swaggerInfo()).select()
-			.apis(RequestHandlerSelectors.basePackage("org.sopt.makers.operation.controller"))
+			.apis(RequestHandlerSelectors.basePackage("goormton.tamrazu.server.controller"))
 			.paths(PathSelectors.any())
 			.build()
 			.useDefaultResponseMessages(false);
