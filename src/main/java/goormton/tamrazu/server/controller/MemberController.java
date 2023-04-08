@@ -1,5 +1,9 @@
 package goormton.tamrazu.server.controller;
 
+import static java.util.Objects.*;
+
+import java.security.Principal;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,9 +33,13 @@ public class MemberController {
 		return ResponseEntity.ok(ApiResponse.success("회원가입 성공", response));
 	}
 
-	@GetMapping("/page/{memberId}")
-	public ResponseEntity<ApiResponse> getPage(@PathVariable("memberId") Long memberId) {
-		MemberPageResponseDto response = memberService.getPage(memberId);
+	@GetMapping("/page")
+	public ResponseEntity<ApiResponse> getPage(Principal principal) {
+		MemberPageResponseDto response = memberService.getPage(getMemberId(principal));
 		return ResponseEntity.ok(ApiResponse.success("유저 페이지 조회 성공", response));
+	}
+
+	private Long getMemberId(Principal principal) {
+		return nonNull(principal) ? Long.parseLong(principal.getName()) : null;
 	}
 }
