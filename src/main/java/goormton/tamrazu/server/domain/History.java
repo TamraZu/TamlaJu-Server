@@ -35,7 +35,6 @@ public class History {
 	public History(Member member, Alcohol alcohol) {
 		setMember(member);
 		setAlcohol(alcohol);
-		alcohol.plusAteCount();
 	}
 
 	public void setMember(Member member) {
