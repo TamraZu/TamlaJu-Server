@@ -45,10 +45,7 @@ public class HistoryService {
 	}
 
 	private boolean createHistory(Member member, Alcohol alcohol) {
-		History savedEat = historyRepository.save(new History(member, alcohol));
-		savedEat.setAlcohol(alcohol);
-		savedEat.setMember(member);
-		alcohol.plusAteCount();
+		historyRepository.save(new History(member, alcohol));
 		return true;
 	}
 }

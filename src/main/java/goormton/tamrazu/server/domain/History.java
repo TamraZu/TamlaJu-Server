@@ -33,8 +33,8 @@ public class History {
 	private Alcohol alcohol;
 
 	public History(Member member, Alcohol alcohol) {
-		this.member = member;
-		this.alcohol = alcohol;
+		setMember(member);
+		setAlcohol(alcohol);
 		alcohol.plusAteCount();
 	}
 
