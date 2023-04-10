@@ -1,7 +1,11 @@
 package goormton.tamrazu.server.controller;
 
+import java.security.Principal;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/eats")
+@RequestMapping("/api/v1/histories")
 public class HistoryController {
 
 	private final HistoryService historyService;
@@ -26,9 +30,11 @@ public class HistoryController {
 		@io.swagger.annotations.ApiResponse(code = 401, message = "인가인증 실패"),
 		@io.swagger.annotations.ApiResponse(code = 500, message = "서버 에러")
 	})
-	@PostMapping
-	public ResponseEntity<ApiResponse> eatAlcohol(@RequestBody HistoryRequestDto requestDto) {
-		boolean hasEat = historyService.eatAlcohol(requestDto);
+	@PutMapping("/{alcoholId}")
+	public ResponseEntity<ApiResponse> eatAlcohol(Principal principal, @PathVariable Long alcoholId) {
+		boolean hasEat = historyService.eatAlcohol(Long.valueOf(principal.getName()), alcoholId);
 		return ResponseEntity.ok(ApiResponse.success(hasEat ? "등록 성공" : "해제 성공"));
 	}
+
+
 }

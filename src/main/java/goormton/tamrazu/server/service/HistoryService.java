@@ -24,11 +24,11 @@ public class HistoryService {
 	private final AlcoholRepository alcoholRepository;
 
 	@Transactional
-	public boolean eatAlcohol(HistoryRequestDto requestDto) {
-		Member member = memberRepository.findById(requestDto.memberId())
+	public boolean eatAlcohol(Long memberId, Long alcoholId) {
+		Member member = memberRepository.findById(memberId)
 			.orElseThrow(() -> new EntityNotFoundException("해당 유저가 존재하지 않습니다."));
 
-		Alcohol alcohol = alcoholRepository.findById(requestDto.alcoholId())
+		Alcohol alcohol = alcoholRepository.findById(alcoholId)
 			.orElseThrow(() -> new EntityNotFoundException("해당 전통주가 존재하지 않습니다."));
 
 		return historyRepository.findByMemberAndAlcohol(member, alcohol)
