@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import goormton.tamrazu.server.domain.Alcohol;
 import goormton.tamrazu.server.domain.History;
 import goormton.tamrazu.server.domain.Member;
-import goormton.tamrazu.server.dto.eat.HistoryRequestDto;
 import goormton.tamrazu.server.repository.HistoryRepository;
 import goormton.tamrazu.server.repository.alcohol.AlcoholRepository;
 import goormton.tamrazu.server.repository.MemberRepository;
