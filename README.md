@@ -4,9 +4,7 @@
 
 내 손안에 탐나는 제주 전통주 도감, 탐라주
 
-[탐라주 서비스 바로가기](https://tamrazu.vercel.app/SignIn)
-- 아이디: guest1
-- 비밀번호: 1111
+[탐라주 서비스 바로가기](https://tamrazu.vercel.app)
 
 <br/>
 
@@ -28,17 +26,7 @@
 <br/>
 
 ### 🥕 API 명세서
-| API명 | URL |
-| :---: | :---: |
-| 로그인(아이디: guest1, 비밀번호: 1111) | [[POST] /api/v1/members/sign](https://github.com/TamraZu/.github/wiki/%EB%A1%9C%EA%B7%B8%EC%9D%B8) |
-| 양조장 전체 조회 | [[GET] /api/v1/factories?memberId=](https://github.com/TamraZu/.github/wiki/%EC%96%91%EC%A1%B0%EC%9E%A5-%EC%A0%84%EC%B2%B4-%EC%A1%B0%ED%9A%8C) |
-| 전통주 상위 3개 조회 | [[GET] /api/v1/alcohols/rank](https://github.com/TamraZu/.github/wiki/%EC%A0%84%ED%86%B5%EC%A3%BC-%EC%83%81%EC%9C%84-3%EA%B0%9C-%EC%A1%B0%ED%9A%8C) |
-| 양조장 상세 조회 | [[GET] ~/api/v1/factories/{factoryId}](https://github.com/TamraZu/.github/wiki/%EC%96%91%EC%A1%B0%EC%9E%A5-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C) |
-| 전통주 전체 조회 | [[GET] ~/api/v1/alcohols?memberId=&category=](https://github.com/TamraZu/.github/wiki/%EC%A0%84%ED%86%B5%EC%A3%BC-%EC%A0%84%EC%B2%B4-%EC%A1%B0%ED%9A%8C) |
-| 카테고리 전체 조회 | [[GET] ~/api/v1/categories](https://github.com/TamraZu/.github/wiki/%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC-%EC%A0%84%EC%B2%B4-%EC%A1%B0%ED%9A%8C) |
-| 전통주 상세 조회 | [[GET] ~/api/v1/alcohols/{alcoholId}?memberId=](https://github.com/TamraZu/.github/wiki/%EC%A0%84%ED%86%B5%EC%A3%BC-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C) |
-| 전통주 마셔봤어요 기능 | [[GET] ~/api/v1/eats](https://github.com/TamraZu/.github/wiki/%EC%A0%84%ED%86%B5%EC%A3%BC-%EB%A7%88%EC%85%94%EB%B4%A4%EC%96%B4%EC%9A%94-%EA%B8%B0%EB%8A%A5) |
-| 유저페이지 조회 | [[GET] ~/api/v1/members/page/{memberId}](https://github.com/TamraZu/.github/wiki/%EC%9C%A0%EC%A0%80%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%A1%B0%ED%9A%8C) |
+https://tamrazu.store/swagger-ui/index.html
 
 
 <br/>
