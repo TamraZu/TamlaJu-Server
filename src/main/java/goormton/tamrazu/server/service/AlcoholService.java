@@ -17,7 +17,7 @@ import goormton.tamrazu.server.dto.alcohol.AlcoholDetailResponseDto;
 import goormton.tamrazu.server.dto.alcohol.AlcoholRankResponseDto;
 import goormton.tamrazu.server.dto.alcohol.AlcoholResponseDto;
 import goormton.tamrazu.server.repository.alcohol.AlcoholRepository;
-import goormton.tamrazu.server.repository.MemberRepository;
+import goormton.tamrazu.server.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 
 @Service

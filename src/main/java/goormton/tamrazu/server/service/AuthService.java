@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import goormton.tamrazu.server.domain.Member;
 import goormton.tamrazu.server.dto.auth.AuthRequestDTO;
 import goormton.tamrazu.server.dto.auth.AuthResponseDTO;
-import goormton.tamrazu.server.repository.MemberRepository;
+import goormton.tamrazu.server.repository.member.MemberRepository;
 import goormton.tamrazu.server.security.JwtTokenProvider;
 import goormton.tamrazu.server.security.MemberAuthentication;
 import lombok.RequiredArgsConstructor;

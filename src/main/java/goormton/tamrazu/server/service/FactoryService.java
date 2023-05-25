@@ -16,8 +16,7 @@ import goormton.tamrazu.server.domain.Member;
 import goormton.tamrazu.server.dto.factory.FactoryDetailResponseDto;
 import goormton.tamrazu.server.dto.factory.FactoryResponseDto;
 import goormton.tamrazu.server.repository.FactoryRepository;
-import goormton.tamrazu.server.repository.HistoryRepository;
-import goormton.tamrazu.server.repository.MemberRepository;
+import goormton.tamrazu.server.repository.member.MemberRepository;
 import goormton.tamrazu.server.repository.alcohol.AlcoholRepository;
 import lombok.RequiredArgsConstructor;
 
