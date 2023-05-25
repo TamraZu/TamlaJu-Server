@@ -3,30 +3,32 @@ package goormton.tamrazu.server.dto.member;
 import java.util.List;
 
 import goormton.tamrazu.server.domain.Alcohol;
+import goormton.tamrazu.server.domain.History;
 import goormton.tamrazu.server.domain.Member;
 
 public record MemberPageResponseDto(
 	Long memberId,
 	String nickname,
 	int count,
-	List<MemberAlcoholVo> alcohols) {
+	List<MemberAlcohol> alcohols) {
 	public static MemberPageResponseDto of(Member member) {
-
-		List<MemberAlcoholVo> alcohols = member.getHistories()
-			.stream()
-			.map(eat -> MemberAlcoholVo.of(eat.getAlcohol()))
-			.toList();
-
+		List<MemberAlcohol> alcohols = getAlcohols(member.getHistories());
 		return new MemberPageResponseDto(
 			member.getId(),
 			member.getNickname(),
 			alcohols.size(),
 			alcohols);
 	}
+
+	private static List<MemberAlcohol> getAlcohols(List<History> histories) {
+		return histories.stream()
+			.map(history -> MemberAlcohol.of(history.getAlcohol()))
+			.toList();
+	}
 }
 
-record MemberAlcoholVo(Long alcoholId, String name, String imageUrl) {
-	static MemberAlcoholVo of(Alcohol alcohol) {
-		return new MemberAlcoholVo(alcohol.getId(), alcohol.getName(), alcohol.getImageUrl());
+record MemberAlcohol(Long alcoholId, String name, String imageUrl) {
+	static MemberAlcohol of(Alcohol alcohol) {
+		return new MemberAlcohol(alcohol.getId(), alcohol.getName(), alcohol.getImageUrl());
 	}
 }
