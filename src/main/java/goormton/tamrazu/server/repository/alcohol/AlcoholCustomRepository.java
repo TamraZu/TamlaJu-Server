@@ -4,11 +4,8 @@ import java.util.List;
 
 import goormton.tamrazu.server.domain.Alcohol;
 import goormton.tamrazu.server.domain.Category;
-import goormton.tamrazu.server.domain.Factory;
-import goormton.tamrazu.server.domain.Member;
 
 public interface AlcoholCustomRepository {
-	List<Alcohol> getAlcoholsMemberHistory(Member member);
+	List<Alcohol> getAlcoholsMemberHistory(Long memberId);
 	List<Alcohol> getAllByCategory(Category category);
-	List<Alcohol> getAlcoholsFactory(Factory factory);
 }

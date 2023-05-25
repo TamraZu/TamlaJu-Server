@@ -13,8 +13,6 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 
 import goormton.tamrazu.server.domain.Alcohol;
 import goormton.tamrazu.server.domain.Category;
-import goormton.tamrazu.server.domain.Factory;
-import goormton.tamrazu.server.domain.Member;
 import lombok.RequiredArgsConstructor;
 
 @Repository
@@ -24,12 +22,12 @@ public class AlcoholRepositoryImpl implements AlcoholCustomRepository {
 	private final JPAQueryFactory queryFactory;
 
 	@Override
-	public List<Alcohol> getAlcoholsMemberHistory(Member member) {
+	public List<Alcohol> getAlcoholsMemberHistory(Long memberId) {
 		return queryFactory
 			.select(alcohol)
 			.from(alcohol)
 			.leftJoin(alcohol.histories, history)
-			.where(history.member.eq(member))
+			.where(history.member.id.eq(memberId))
 			.fetch();
 	}
 
@@ -38,14 +36,6 @@ public class AlcoholRepositoryImpl implements AlcoholCustomRepository {
 		return queryFactory
 			.selectFrom(alcohol)
 			.where(categoryEq(category))
-			.fetch();
-	}
-
-	@Override
-	public List<Alcohol> getAlcoholsFactory(Factory factory) {
-		return queryFactory
-			.selectFrom(alcohol)
-			.where(alcohol.factory.eq(factory))
 			.fetch();
 	}
 
