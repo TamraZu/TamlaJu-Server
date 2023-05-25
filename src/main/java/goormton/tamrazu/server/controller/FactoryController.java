@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import goormton.tamrazu.server.common.ApiResponse;
@@ -46,9 +45,7 @@ public class FactoryController {
 		@io.swagger.annotations.ApiResponse(code = 500, message = "서버 에러")
 	})
 	@GetMapping("/{factoryId}")
-	public ResponseEntity<ApiResponse> getAlcoholsOfFactory(
-		Principal principal, @PathVariable("factoryId") Long factoryId) {
-
+	public ResponseEntity<ApiResponse> getAlcoholsOfFactory(Principal principal, @PathVariable Long factoryId) {
 		FactoryDetailResponseDto response = factoryService.getAlcoholsOfFactory(factoryId, getMemberId(principal));
 		return ResponseEntity.ok(ApiResponse.success("양조장 단일 조회 성공", response));
 	}
